@@ -1,0 +1,28 @@
+E
+F
++ CarsonCity 1
++ Elko 2
++ Ely 3
++ LasVegas 4
++ Reno 5
++ VirginiaCity 6
+E
+F
+= CarsonCity Reno 30
+= Reno Elko 288
+= Reno Ely 320
+= Elko Ely 188
+= CarsonCity LasVegas 436
+= Ely LasVegas 242
+= CarsonCity VirginiaCity 15
+= Reno VirginiaCity 24
+# Elko LasVegas
+E
+F
+# Ely LasVegas
+! Ely LasVegas
+# Ely LasVegas
+- CarsonCity
+C
+q
+

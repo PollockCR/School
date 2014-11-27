@@ -1,0 +1,2 @@
+main:g++ -o main test9.cpp
+db:g++ -o db database.cpp

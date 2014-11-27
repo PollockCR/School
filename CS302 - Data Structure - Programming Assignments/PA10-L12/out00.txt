@@ -1,0 +1,750 @@
+
+Commands:
+  H       : Help (displays this message)
+  +v      : Insert (or update) vertex v
+  =v w wt : Insert an edge with weight wt between vertices v and w
+  ?v      : Retrieve vertex
+  #v w    : Display the weight of the edge between vertices v and w
+  -v      : Remove vertex v
+  !v w    : Remove the edge between vertices v and w
+  C       : Clear the graph
+  E       : Empty graph?
+  F       : Full graph?
+  Q       : Quit the test program
+
+
+Path matrix : 
+	
+
+Proper coloring
+
+All vertices have even degree
+Empty graph
+
+Command (H for help): Graph is empty
+
+Path matrix : 
+	
+
+Proper coloring
+
+All vertices have even degree
+Empty graph
+
+Command (H for help): Graph is NOT full
+
+Path matrix : 
+	
+
+Proper coloring
+
+All vertices have even degree
+Empty graph
+
+Command (H for help): Insert vertex : CarsonCity
+
+Path matrix : 
+	0	
+0	0	
+
+Proper coloring
+
+All vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+
+Edge matrix : 
+	0	
+0	- 	
+
+Command (H for help): Insert vertex : Elko
+
+Path matrix : 
+	0	1	
+0	0	- 	
+1	- 	0	
+
+Proper coloring
+
+All vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+
+Edge matrix : 
+	0	1	
+0	- 	- 	
+1	- 	- 	
+
+Command (H for help): Insert vertex : Ely
+
+Path matrix : 
+	0	1	2	
+0	0	- 	- 	
+1	- 	0	- 	
+2	- 	- 	0	
+
+Proper coloring
+
+All vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+
+Edge matrix : 
+	0	1	2	
+0	- 	- 	- 	
+1	- 	- 	- 	
+2	- 	- 	- 	
+
+Command (H for help): Insert vertex : LasVegas
+
+Path matrix : 
+	0	1	2	3	
+0	0	- 	- 	- 	
+1	- 	0	- 	- 	
+2	- 	- 	0	- 	
+3	- 	- 	- 	0	
+
+Proper coloring
+
+All vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+
+Edge matrix : 
+	0	1	2	3	
+0	- 	- 	- 	- 	
+1	- 	- 	- 	- 	
+2	- 	- 	- 	- 	
+3	- 	- 	- 	- 	
+
+Command (H for help): Insert vertex : Reno
+
+Path matrix : 
+	0	1	2	3	4	
+0	0	- 	- 	- 	- 	
+1	- 	0	- 	- 	- 	
+2	- 	- 	0	- 	- 	
+3	- 	- 	- 	0	- 	
+4	- 	- 	- 	- 	0	
+
+Proper coloring
+
+All vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+
+Edge matrix : 
+	0	1	2	3	4	
+0	- 	- 	- 	- 	- 	
+1	- 	- 	- 	- 	- 	
+2	- 	- 	- 	- 	- 	
+3	- 	- 	- 	- 	- 	
+4	- 	- 	- 	- 	- 	
+
+Command (H for help): Insert vertex : VirginiaCity
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	- 	- 	- 	- 	- 	
+1	- 	0	- 	- 	- 	- 	
+2	- 	- 	0	- 	- 	- 	
+3	- 	- 	- 	0	- 	- 	
+4	- 	- 	- 	- 	0	- 	
+5	- 	- 	- 	- 	- 	0	
+
+Proper coloring
+
+All vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	- 	- 	- 	
+1	- 	- 	- 	- 	- 	- 	
+2	- 	- 	- 	- 	- 	- 	
+3	- 	- 	- 	- 	- 	- 	
+4	- 	- 	- 	- 	- 	- 	
+5	- 	- 	- 	- 	- 	- 	
+
+Command (H for help): Graph is NOT empty
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	- 	- 	- 	- 	- 	
+1	- 	0	- 	- 	- 	- 	
+2	- 	- 	0	- 	- 	- 	
+3	- 	- 	- 	0	- 	- 	
+4	- 	- 	- 	- 	0	- 	
+5	- 	- 	- 	- 	- 	0	
+
+Proper coloring
+
+All vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	- 	- 	- 	
+1	- 	- 	- 	- 	- 	- 	
+2	- 	- 	- 	- 	- 	- 	
+3	- 	- 	- 	- 	- 	- 	
+4	- 	- 	- 	- 	- 	- 	
+5	- 	- 	- 	- 	- 	- 	
+
+Command (H for help): Graph is NOT full
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	- 	- 	- 	- 	- 	
+1	- 	0	- 	- 	- 	- 	
+2	- 	- 	0	- 	- 	- 	
+3	- 	- 	- 	0	- 	- 	
+4	- 	- 	- 	- 	0	- 	
+5	- 	- 	- 	- 	- 	0	
+
+Proper coloring
+
+All vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	- 	- 	- 	
+1	- 	- 	- 	- 	- 	- 	
+2	- 	- 	- 	- 	- 	- 	
+3	- 	- 	- 	- 	- 	- 	
+4	- 	- 	- 	- 	- 	- 	
+5	- 	- 	- 	- 	- 	- 	
+
+Command (H for help): Insert edge : CarsonCity Reno 30
+Size = 6, idx_v1 = 0, idx_v2 = 4
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	- 	- 	- 	30	- 	
+1	- 	0	- 	- 	- 	- 	
+2	- 	- 	0	- 	- 	- 	
+3	- 	- 	- 	0	- 	- 	
+4	30	- 	- 	- 	0	- 	
+5	- 	- 	- 	- 	- 	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	- 	30	- 	
+1	- 	- 	- 	- 	- 	- 	
+2	- 	- 	- 	- 	- 	- 	
+3	- 	- 	- 	- 	- 	- 	
+4	30	- 	- 	- 	- 	- 	
+5	- 	- 	- 	- 	- 	- 	
+
+Command (H for help): Insert edge : Reno Elko 288
+Size = 6, idx_v1 = 4, idx_v2 = 1
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	- 	- 	30	- 	
+1	318	0	- 	- 	288	- 	
+2	- 	- 	0	- 	- 	- 	
+3	- 	- 	- 	0	- 	- 	
+4	30	288	- 	- 	0	- 	
+5	- 	- 	- 	- 	- 	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	- 	30	- 	
+1	- 	- 	- 	- 	288	- 	
+2	- 	- 	- 	- 	- 	- 	
+3	- 	- 	- 	- 	- 	- 	
+4	30	288	- 	- 	- 	- 	
+5	- 	- 	- 	- 	- 	- 	
+
+Command (H for help): Insert edge : Reno Ely 320
+Size = 6, idx_v1 = 4, idx_v2 = 2
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	- 	30	- 	
+1	318	0	608	- 	288	- 	
+2	350	608	0	- 	320	- 	
+3	- 	- 	- 	0	- 	- 	
+4	30	288	320	- 	0	- 	
+5	- 	- 	- 	- 	- 	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	- 	30	- 	
+1	- 	- 	- 	- 	288	- 	
+2	- 	- 	- 	- 	320	- 	
+3	- 	- 	- 	- 	- 	- 	
+4	30	288	320	- 	- 	- 	
+5	- 	- 	- 	- 	- 	- 	
+
+Command (H for help): Insert edge : Elko Ely 188
+Size = 6, idx_v1 = 1, idx_v2 = 2
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	- 	30	- 	
+1	318	0	188	- 	288	- 	
+2	350	188	0	- 	320	- 	
+3	- 	- 	- 	0	- 	- 	
+4	30	288	320	- 	0	- 	
+5	- 	- 	- 	- 	- 	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	- 	30	- 	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	- 	320	- 	
+3	- 	- 	- 	- 	- 	- 	
+4	30	288	320	- 	- 	- 	
+5	- 	- 	- 	- 	- 	- 	
+
+Command (H for help): Insert edge : CarsonCity LasVegas 436
+Size = 6, idx_v1 = 0, idx_v2 = 3
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	- 	
+1	318	0	188	754	288	- 	
+2	350	188	0	786	320	- 	
+3	436	754	786	0	466	- 	
+4	30	288	320	466	0	- 	
+5	- 	- 	- 	- 	- 	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	- 	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	- 	320	- 	
+3	436	- 	- 	- 	- 	- 	
+4	30	288	320	- 	- 	- 	
+5	- 	- 	- 	- 	- 	- 	
+
+Command (H for help): Insert edge : Ely LasVegas 242
+Size = 6, idx_v1 = 2, idx_v2 = 3
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	- 	
+1	318	0	188	430	288	- 	
+2	350	188	0	242	320	- 	
+3	436	430	242	0	466	- 	
+4	30	288	320	466	0	- 	
+5	- 	- 	- 	- 	- 	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	- 	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	242	320	- 	
+3	436	- 	242	- 	- 	- 	
+4	30	288	320	- 	- 	- 	
+5	- 	- 	- 	- 	- 	- 	
+
+Command (H for help): Insert edge : CarsonCity VirginiaCity 15
+Size = 6, idx_v1 = 0, idx_v2 = 5
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	15	
+1	318	0	188	430	288	333	
+2	350	188	0	242	320	365	
+3	436	430	242	0	466	451	
+4	30	288	320	466	0	45	
+5	15	333	365	451	45	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	15	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	242	320	- 	
+3	436	- 	242	- 	- 	- 	
+4	30	288	320	- 	- 	- 	
+5	15	- 	- 	- 	- 	- 	
+
+Command (H for help): Insert edge : Reno VirginiaCity 24
+Size = 6, idx_v1 = 4, idx_v2 = 5
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	15	
+1	318	0	188	430	288	312	
+2	350	188	0	242	320	344	
+3	436	430	242	0	466	451	
+4	30	288	320	466	0	24	
+5	15	312	344	451	24	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	15	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	242	320	- 	
+3	436	- 	242	- 	- 	- 	
+4	30	288	320	- 	- 	24	
+5	15	- 	- 	- 	24	- 	
+
+Command (H for help): No edge between these vertices
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	15	
+1	318	0	188	430	288	312	
+2	350	188	0	242	320	344	
+3	436	430	242	0	466	451	
+4	30	288	320	466	0	24	
+5	15	312	344	451	24	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	15	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	242	320	- 	
+3	436	- 	242	- 	- 	- 	
+4	30	288	320	- 	- 	24	
+5	15	- 	- 	- 	24	- 	
+
+Command (H for help): Graph is NOT empty
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	15	
+1	318	0	188	430	288	312	
+2	350	188	0	242	320	344	
+3	436	430	242	0	466	451	
+4	30	288	320	466	0	24	
+5	15	312	344	451	24	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	15	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	242	320	- 	
+3	436	- 	242	- 	- 	- 	
+4	30	288	320	- 	- 	24	
+5	15	- 	- 	- 	24	- 	
+
+Command (H for help): Graph is NOT full
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	15	
+1	318	0	188	430	288	312	
+2	350	188	0	242	320	344	
+3	436	430	242	0	466	451	
+4	30	288	320	466	0	24	
+5	15	312	344	451	24	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	15	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	242	320	- 	
+3	436	- 	242	- 	- 	- 	
+4	30	288	320	- 	- 	24	
+5	15	- 	- 	- 	24	- 	
+
+Command (H for help): Weight = 242
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	15	
+1	318	0	188	430	288	312	
+2	350	188	0	242	320	344	
+3	436	430	242	0	466	451	
+4	30	288	320	466	0	24	
+5	15	312	344	451	24	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	15	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	242	320	- 	
+3	436	- 	242	- 	- 	- 	
+4	30	288	320	- 	- 	24	
+5	15	- 	- 	- 	24	- 	
+
+Command (H for help): Remove the edge between vertices Ely and LasVegas
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	15	
+1	318	0	188	754	288	312	
+2	350	188	0	786	320	344	
+3	436	754	786	0	466	451	
+4	30	288	320	466	0	24	
+5	15	312	344	451	24	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	15	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	- 	320	- 	
+3	436	- 	- 	- 	- 	- 	
+4	30	288	320	- 	- 	24	
+5	15	- 	- 	- 	24	- 	
+
+Command (H for help): No edge between these vertices
+
+Path matrix : 
+	0	1	2	3	4	5	
+0	0	318	350	436	30	15	
+1	318	0	188	754	288	312	
+2	350	188	0	786	320	344	
+3	436	754	786	0	466	451	
+4	30	288	320	466	0	24	
+5	15	312	344	451	24	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	CarsonCity	1
+1	Elko	2
+2	Ely	3
+3	LasVegas	4
+4	Reno	5
+5	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	5	
+0	- 	- 	- 	436	30	15	
+1	- 	- 	188	- 	288	- 	
+2	- 	188	- 	- 	320	- 	
+3	436	- 	- 	- 	- 	- 	
+4	30	288	320	- 	- 	24	
+5	15	- 	- 	- 	24	- 	
+
+Command (H for help): Remove vertex CarsonCity
+
+Path matrix : 
+	0	1	2	3	4	
+0	0	188	- 	288	312	
+1	188	0	- 	320	344	
+2	- 	- 	0	- 	- 	
+3	288	320	- 	0	24	
+4	312	344	- 	24	0	
+
+Proper coloring
+
+NOT all vertices have even degree
+
+Vertex list : 
+0	Elko	2
+1	Ely	3
+2	LasVegas	4
+3	Reno	5
+4	VirginiaCity	6
+
+Edge matrix : 
+	0	1	2	3	4	
+0	- 	188	- 	288	- 	
+1	188	- 	- 	320	- 	
+2	- 	- 	- 	- 	- 	
+3	288	320	- 	- 	24	
+4	- 	- 	- 	24	- 	
+
+Command (H for help): Clear the graph
+
+Path matrix : 
+	
+
+Proper coloring
+
+All vertices have even degree
+Empty graph
+
+Command (H for help): 

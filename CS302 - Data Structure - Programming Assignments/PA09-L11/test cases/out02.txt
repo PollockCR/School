@@ -1,0 +1,94 @@
+
+Commands:
+  H    : Help (displays this message)
+  +pty : Insert data item with priority pty
+  -    : Remove highest priority data item
+  C    : Clear the heap
+  E    : Empty heap?
+  F    : Full heap?
+  W    : Write levels   (Active   : Programming Exercise 3)
+  Q    : Quit the test program
+
+
+Empty heap
+
+Command: Heap is empty
+
+Empty heap
+
+Command: Heap is NOT full
+
+Empty heap
+
+Command: Insert : priority = 1
+
+size = 1
+0	1	2	3	4	5	6	7	
+1	
+
+ 1
+
+Command: Insert : priority = 2
+
+size = 2
+0	1	2	3	4	5	6	7	
+2	1	
+
+ 2\
+	 1
+
+Command: Insert : priority = 3
+
+size = 3
+0	1	2	3	4	5	6	7	
+3	1	2	
+
+	 2
+ 3<
+	 1
+
+Command: Heap is NOT empty
+
+size = 3
+0	1	2	3	4	5	6	7	
+3	1	2	
+
+	 2
+ 3<
+	 1
+
+Command: Heap is NOT full
+
+size = 3
+0	1	2	3	4	5	6	7	
+3	1	2	
+
+	 2
+ 3<
+	 1
+
+Command: Levels :
+3 
+1 2 
+
+size = 3
+0	1	2	3	4	5	6	7	
+3	1	2	
+
+	 2
+ 3<
+	 1
+
+Command: Clear the heap
+
+Empty heap
+
+Command: Heap is empty
+
+Empty heap
+
+Command: Heap is NOT full
+
+Empty heap
+
+Command: 

@@ -1,0 +1,197 @@
+
+Commands:
+  P    : [P]rint Help (displays this message)
+  +key : Insert (or update) data item (use integers)
+  ?key : Retrieve data item
+  -key : Remove data item
+  K    : Write keys in ascending order
+  C    : Clear the tree
+  E    : Empty tree?
+  G    : Get count of nodes          (Active   : In-lab Exercise 2)
+  H    : Height                      (Active   : In-lab Exercise 2)
+  <key : Write keys that are < key   (Inactive : In-lab Exercise 3)
+  Q    : Quit the test program
+
+Empty tree
+
+Command: Tree is empty
+Empty tree
+
+Command: Tree nodes count = 0
+Empty tree
+
+Command: Tree height = 0
+Empty tree
+
+Command: Insert : key = 4
+
+	 4
+
+
+Command: Insert : key = 2
+
+	 4\
+		 2
+
+
+Command: Insert : key = 1
+
+	 4\
+		 2\
+			 1
+
+
+Command: Insert : key = 6
+
+		 6
+	 4<
+		 2\
+			 1
+
+
+Command: Insert : key = 3
+
+		 6
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Insert : key = 7
+
+			 7
+		 6/
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Insert : key = 5
+
+			 7
+		 6<
+			 5
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Tree height = 3
+
+			 7
+		 6<
+			 5
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Keys:
+1 2 3 4 5 6 7 
+
+			 7
+		 6<
+			 5
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Retrieved : getKey = 5
+
+			 7
+		 6<
+			 5
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Not found
+
+			 7
+		 6<
+			 5
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Not found
+
+			 7
+		 6<
+			 5
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Removed data item
+
+			 7
+		 6/
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Tree height = 3
+
+			 7
+		 6/
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Tree is NOT empty
+
+			 7
+		 6/
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Tree nodes count = 6
+
+			 7
+		 6/
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Tree height = 3
+
+			 7
+		 6/
+	 4<
+			 3
+		 2<
+			 1
+
+
+Command: Clear the tree
+Empty tree
+
+Command: Tree is empty
+Empty tree
+
+Command: Tree nodes count = 0
+Empty tree
+
+Command: 

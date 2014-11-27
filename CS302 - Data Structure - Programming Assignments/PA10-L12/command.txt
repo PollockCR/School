@@ -1,0 +1,1 @@
+main: g++ -I. -o main test12.cpp WeightedGraph.cpp

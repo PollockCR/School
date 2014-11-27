@@ -1,0 +1,30 @@
+
+Commands:
+  H   : Help (displays this message)
+  +x  : Insert x after the cursor
+  -   : Remove the data item marked by the cursor
+  =x  : Replace the data item marked by the cursor with x
+  @   : Display the data item marked by the cursor
+  <   : Go to the beginning of the list
+  >   : Go to the end of the list
+  N   : Go to the next data item
+  P   : Go to the prior data item
+  C   : Clear the list
+  E   : Empty list?
+  F   : Full list?
+  M   : Move data item marked by cursor to beginning  (  Active   : In-lab Ex. 2)
+  #x  : Insert x before the cursor                    (  Active  : In-lab Ex. 3)
+  Q   : Quit the test program
+
+Empty list
+
+Command: Insert 1
+[1] 
+
+Command: Insert 2
+1 [2] 
+
+Command: Insert 3
+1 2 [3] 
+
+Command: 
