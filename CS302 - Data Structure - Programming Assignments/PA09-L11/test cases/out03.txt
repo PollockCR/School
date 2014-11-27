@@ -1,8 +1,0 @@
-
-Enter the number of priority levels : Enter the length of time to run the simulator : At 1 dequeued : 19 0 1
-At 4 dequeued : 3 3 1
-At 5 dequeued : 0 4 1
-At 6 dequeued : 15 5 1
-At 7 dequeued : 11 6 1
-At 8 dequeued : 0 7 1
-At 9 dequeued : 5 7 2

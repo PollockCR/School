@@ -1,2 +1,0 @@
-main:g++ -I. -o main test11.cpp
-ptyq:g++ -I. -o ptyq ossim.cpp

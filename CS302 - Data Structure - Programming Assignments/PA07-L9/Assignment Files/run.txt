@@ -1,7 +1,0 @@
-main:in00:out00
-main:in01:out01
-main:in02:out02
-main:in03:out03
-db:in04:out04
-db:in05:out05
-

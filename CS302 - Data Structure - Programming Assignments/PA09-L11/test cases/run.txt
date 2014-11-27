@@ -1,5 +1,0 @@
-main:in00:out00
-main:in01:out01
-main:in02:out02
-ptyq:in03:out03
-ptyq:in04:out04
