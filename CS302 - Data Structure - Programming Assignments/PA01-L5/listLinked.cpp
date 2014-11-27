@@ -4,7 +4,7 @@
 //
 //  Class implementation for the linked implementation of the List ADT
 //
-//  Catherine Pollock
+//  Author: Catherine Pollock
 //
 //--------------------------------------------------------------------
 
