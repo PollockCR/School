@@ -17,7 +17,7 @@
 #include <sstream>
 #include <map>
 #include <queue>
-#include "rushClasses.h"
+#include "rushClasses.cpp"
 using namespace std;
 
 /// global constants

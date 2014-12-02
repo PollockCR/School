@@ -31,8 +31,6 @@ class Board
          Board();
          Board( const Board& );
          Board& operator=( const Board& );
-         bool operator==( const Board& );
-         bool operator!=( const Board& );
          void saveData( int );
          bool forward( int );
          bool backward( int );
@@ -40,7 +38,7 @@ class Board
          bool canMove( int, int ) const;
          int getNumCars() const;
          int numCars;
-         Car boardCars[ 10 ];
+         Car boardCars[ 18 ];
 };
 
 #endif
