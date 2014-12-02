@@ -70,55 +70,6 @@ Board& Board::operator=( const Board& other )
 }
 
 /**
- * Overloaded equality operator
- * 
- * Returns if boards are identical or not
- * 
- * @param other source of boardCars to compare with
- * @return bool if board is identical
-*/
-bool Board::operator==( const Board& other )
-{
-   /// initialization
-   int i;
-   
-   /// check for same number of cars
-   if( numCars != other.numCars )
-   {
-      return false;
-   }
-   
-   /// loop through and compare cars
-   for( i = 0; i < numCars; i++ )
-   {
-      if( boardCars[ i ].length != other.boardCars[ i ].length 
-          || boardCars[ i ].row != other.boardCars[ i ].row 
-          || boardCars[ i ].col != other.boardCars[ i ].col
-          || boardCars[ i ].orientation != other.boardCars[ i ].orientation )
-      {
-         return false;
-      }  
-   }
-   
-   /// return true if identical 
-   return true;
-}
-
-/**
- * Overloaded inequality operator
- * 
- * Returns if boards are not identical
- * 
- * @param other source of boardCars to compare
- * @return bool if board is not equivalent
-*/
-bool Board::operator!=( const Board& other )
-{
-   /// returns opposite of equality operator
-   return !( *this == other );
-}
-
-/**
  * saveData
  * 
  * Reads in and saves data into boardCars until no more cars to
