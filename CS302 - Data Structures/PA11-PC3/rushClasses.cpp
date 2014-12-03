@@ -55,6 +55,9 @@ Board& Board::operator=( const Board& other )
    /// if they are not the same board
    if( this != &other )
    {
+      /// clear the current board
+      clear(); 
+      
       /// set number of cars
       numCars = other.numCars;
       
@@ -243,18 +246,15 @@ bool Board::canMove( int row, int col ) const
 }
 
 /**
- * getNumCars
+ * clear
  * 
- * Returns number of cars in board.
- * 
- * @return int number of cars in board
+ * Clears all data from the board, including number of cars and
+ * data within boardCars.
 */
-int Board::getNumCars() const
+void Board::clear()
 {
-   return numCars;
+   numCars = 0;
 }
-
-
 
 
 
