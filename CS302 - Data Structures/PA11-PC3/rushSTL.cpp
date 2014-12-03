@@ -17,7 +17,7 @@
 #include <sstream>
 #include <map>
 #include <queue>
-#include "rushClasses.cpp"
+#include "rushClasses.h"
 using namespace std;
 
 /// global constants
@@ -188,8 +188,7 @@ string boardToString( const Board& board )
    stringstream ss;
    string returnString;
    
-   /// concatenate string with each car's data
-   ss << board.numCars;
+   /// concatenate stringstream with each car's data
    for( i = 0; i < board.numCars; i++ )
    {
       ss << board.boardCars[i].length
@@ -197,8 +196,9 @@ string boardToString( const Board& board )
          << board.boardCars[i].orientation;
    }
    
+   /// convert from string stream to string
    returnString = ss.str();
-   
+
    /// return string with car data for board
    return returnString;
 }
@@ -215,15 +215,15 @@ Board stringToBoard( const string boardString )
 {
    /// initialize
    Board board;
-   board.numCars = boardString[ 0 ] - '0';
+   board.numCars = boardString.length() / 4;
    int i;
    
    for( i = 0; i < board.numCars; i++ )
    {
-      board.boardCars[ i ].length = boardString[ ( i * 4 ) + 1 ] - '0'; 
-      board.boardCars[ i ].row = boardString[ ( i * 4 ) + 2 ] - '0'; 
-      board.boardCars[ i ].col = boardString[ ( i * 4 ) + 3 ] - '0'; 
-      board.boardCars[ i ].orientation = boardString[ ( i * 4 ) + 4 ]; 
+      board.boardCars[ i ].length = boardString[ ( i * 4 ) ] - '0'; 
+      board.boardCars[ i ].row = boardString[ ( i * 4 ) + 1 ] - '0'; 
+      board.boardCars[ i ].col = boardString[ ( i * 4 ) + 2 ] - '0'; 
+      board.boardCars[ i ].orientation = boardString[ ( i * 4 ) + 3 ]; 
    }
    
    /// return Board with data from string

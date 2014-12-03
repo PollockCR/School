@@ -36,7 +36,7 @@ class Board
          bool backward( int );
          bool isSolved() const;
          bool canMove( int, int ) const;
-         int getNumCars() const;
+         void clear();
          int numCars;
          Car boardCars[ 18 ];
 };
