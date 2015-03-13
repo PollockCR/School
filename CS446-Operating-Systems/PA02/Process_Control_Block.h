@@ -29,11 +29,12 @@
 class Action
 {
    public:
+      Action();
       Action( char type, string descriptor, int cycle );
-   private:
       char actionType;
       string actionDescriptor;
       int actionCycle;
+   private:      
 };
 
 class PCB

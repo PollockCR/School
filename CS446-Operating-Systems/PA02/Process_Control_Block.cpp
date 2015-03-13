@@ -29,6 +29,11 @@ PCB::PCB( int id )
    state = "Enter";
 }
 
+Action::Action()
+{
+   //
+}
+
 Action::Action( char type, string descriptor, int cycle )
 {
    actionType = type;
