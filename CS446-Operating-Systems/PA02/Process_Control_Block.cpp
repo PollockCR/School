@@ -12,6 +12,7 @@
    #include <iostream> // used for I/O
    #include <string> // used for string operations
    #include <cstring> // used for c string operations
+   #include <sstream> // used for string streams 
    #include <ctime> // used to keep track of time
    #include <map> // used for cylce times
    #include <list> // used for process actions
@@ -28,6 +29,8 @@ PCB::PCB( int id )
    processID = id;
    state = "Enter";
 }
+
+Action::Action() {}
 
 Action::Action( char type, string descriptor, int cycle )
 {

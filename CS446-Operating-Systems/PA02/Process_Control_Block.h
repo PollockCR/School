@@ -15,6 +15,7 @@
    #include <iostream> // used for I/O
    #include <string> // used for string operations
    #include <cstring> // used for c string operations
+   #include <sstream> // used for string streams 
    #include <ctime> // used to keep track of time
    #include <map> // used for cylce times
    #include <list> // used for process actions
@@ -29,11 +30,12 @@
 class Action
 {
    public:
+      Action();
       Action( char type, string descriptor, int cycle );
-   private:
       char actionType;
       string actionDescriptor;
       int actionCycle;
+   private:      
 };
 
 class PCB
@@ -44,7 +46,6 @@ class PCB
       int processID;
       string state;
       list<Action> actions;
-      //string runAction();
    private:
 };
 
