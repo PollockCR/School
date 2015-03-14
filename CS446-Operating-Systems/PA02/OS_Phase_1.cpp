@@ -21,6 +21,7 @@
    #include <ctime> // used to keep track of time
    #include <map> // used for cylce times
    #include <list> // used for process actions
+   #include <pthread.h> // used for threads
 
    using namespace std;
 
@@ -31,12 +32,15 @@
    const int OP_COUNT = 5;
 
 // global variables
+   clock_t timer;
+   stringstream actionOutput;
 
 // function prototypes
    bool saveConfig( char* configPath, float &phase, char* metaPath,
       map<string, float>& cycleData, char* logLocation, char* logPath );
    int saveMetaData( char* metaPath, PCB& process );
-   bool executeAction( Action action, clock_t timer, stringstream& actionOutput );
+   void threadActions( PCB& process );
+   void *runner( void *actVoidPtr ); // threads call this function 
 
 // main program
 int main( int argc, char* argv[] )
@@ -50,11 +54,6 @@ int main( int argc, char* argv[] )
    char logPath[ STD_LINE_LEN ];
    int processCount = 0;
    PCB process;
-   Action startAction('S', "start", 0);
-   Action endAction( 'S', "end", 0);
-   clock_t timer;
-   stringstream actionOutput;
-
 
    // STATE: Enter/Start
 
@@ -99,14 +98,9 @@ int main( int argc, char* argv[] )
    // STATE: Running
 
       // start simulator
+      threadActions( process );
 
-         // prepare for output
-         actionOutput.precision(6);
-         actionOutput << fixed;    
-         timer = clock();     
-         saveSucess = executeAction( startAction, timer, actionOutput );
-
-/*
+         /*
          // check for failed save
          if( !saveSucess )
          {
@@ -116,9 +110,8 @@ int main( int argc, char* argv[] )
             // return failure
             return 1;
          }      
-*/
-      // run meta-data and log output
-      saveSucess = executeAction( *(process.actions.begin()), timer, actionOutput );
+         */
+      
       cout << actionOutput.str();
 
    // STATE: Exit
@@ -286,7 +279,6 @@ int saveMetaData( char* metaPath, PCB& process )
                      // queue process action 
                      process.actions.push_back( tempAction ); 
                      // FOR TESTING, PRINT EACH ACTION
-                     // cout << tempType << ' ' << tempCycle << ' ' << tempDescriptor << endl; 
                   }
 
                   // unrecognized action
@@ -307,6 +299,12 @@ int saveMetaData( char* metaPath, PCB& process )
                // end action
                if( tempType == 'A' )
                {
+                  // queue start action
+                  tempAction.actionType = tempType;
+                  tempAction.actionDescriptor = "end";
+                  tempAction.actionCycle = 0;
+                  process.actions.push_back( tempAction );
+
                   // move to next action
                   metaFile.ignore( STD_LINE_LEN, ';' );
                   metaFile.ignore( SPACE_BUF, ' ' ); 
@@ -334,67 +332,163 @@ int saveMetaData( char* metaPath, PCB& process )
    return processCount;
 }
 
-bool executeAction( Action action, clock_t timer, stringstream& actionOutput )
+void threadActions( PCB& process )
+{
+   // initialize variables
+   int tidCount = process.actions.size() + 2; // number of actions in queue plus system start/end
+   pthread_t tids[ tidCount ]; // an array of threads to be joined
+   pthread_attr_t attr;
+   void* actVoidPtr;
+   int err;
+   int tidIndex = 0;
+   int actionIndex;
+
+   // create start and end actions
+   Action startAction('S', "start", 0);
+   Action endAction( 'S', "end", 0);
+
+   // set time output   
+   actionOutput.precision(6);
+   actionOutput << fixed;    
+   timer = clock();   
+
+   // get the default attributes
+   pthread_attr_init(&attr);
+
+   // complete actions
+
+      // thread system start
+      actVoidPtr = &startAction;
+      pthread_create( &( tids[ tidIndex ] ), &attr, runner, actVoidPtr );
+      pthread_join( tids[ tidIndex ], NULL );
+      tidIndex++;
+
+      // thread each action in action queue
+      while( !( process.actions.empty() ) )
+      {
+         // get first item in queue
+         actVoidPtr = &(process.actions.front());
+
+         // create thread and run action
+         pthread_create( &( tids[ tidIndex ] ), &attr, runner, actVoidPtr );
+         pthread_join( tids[ tidIndex ], NULL );
+
+         // increment to next thread
+         tidIndex++;
+
+         // remove completed action
+         process.actions.pop_front();
+      }
+
+      // thread end system
+      actVoidPtr = &endAction;
+      pthread_create( &( tids[ tidIndex ] ), &attr, runner, actVoidPtr ); 
+      pthread_join( tids[ tidIndex ], NULL );          
+}
+
+void *runner( void* actVoidPtr )
 {
    // initialize variables
 
-   // action types
+      // set void pointer to Action pointer
+      Action* actPtr = static_cast<Action*>( actVoidPtr );
 
-      // system action type
-      if( action.actionType == 'S' )
+   // system action type
+   if( actPtr->actionType == 'S' )
+   {
+      // start system descriptor
+      if( actPtr->actionDescriptor == "start")
       {
-         // start system descriptor
-         if( action.actionDescriptor == "start")
-         {
-            actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
-            actionOutput << " - " << "Simulator program starting \n";
-         }
-
-         // end system descriptor
-         else
-         {
-
-         }
-
+         actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+         actionOutput << " - " << "Simulator program starting \n";
       }
 
-      // application action type
-      else if( action.actionType == 'A' )
+      // end system descriptor
+      else
       {
-         // start application descriptor
+         actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+         actionOutput << " - " << "Simulator program ending \n";
+      }
+
+   }
+
+   // application action type
+   else if( actPtr->actionType == 'A' )
+   {
+      // start application descriptor
+      if( actPtr->actionDescriptor == "start")
+      {
          actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
          actionOutput << " - " << "OS: preparing process 1 \n";
 
          actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
-         actionOutput << " - " << "OS: starting process 1 \n";         
+         actionOutput << " - " << "OS: starting process 1 \n";   
+      }      
 
-         // end application descriptor
+      // end application descriptor
+      else
+      {
+         actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+         actionOutput << " - " << "OS: removing process 1 \n";         
       }
+       
+   }
 
-      // process action type
-      else if( action.actionType == 'P' )
-      {
-         // run application descriptor
-      }
+   // process action type
+   else if( actPtr->actionType == 'P' )
+   {
+      // run application descriptor start
+      actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+      actionOutput << " - " << "Process 1: start processing action \n"; 
+      
+      // run for specified time
+      /////////////////////// !!!!
 
-      // input action type
-      else if( action.actionType == 'I' )
-      {
-         // execute input descriptor
-      }
+      // run application desciptor end 
+      actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+      actionOutput << " - " << "Process 1: end processing action \n";
 
-      // output action type
-      else if( action.actionType == 'O' )
-      {
-         // execute output descriptor
-      }   
+   }
 
-      // unrecognized action type
-      else 
-      {
-         return false;
-      }   
+   // input action type
+   else if( actPtr->actionType == 'I' )
+   {
+      // input descriptor start
+      actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+      actionOutput << " - " << "Process 1: start " << actPtr->actionDescriptor << " input \n"; 
+      
+      // run for specified time
+      /////////////////////// !!!!
 
-   // return success
-   return true;
+      // input desciptor end 
+      actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+      actionOutput << " - " << "Process 1: end " << actPtr->actionDescriptor << " input \n";
+   }
+
+   // output action type
+   else if( actPtr->actionType == 'O' )
+   {
+      // output descriptor start
+      actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+      actionOutput << " - " << "Process 1: start " << actPtr->actionDescriptor << " output \n"; 
+      
+      // run for specified time
+      /////////////////////// !!!!
+
+      // output desciptor end 
+      actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+      actionOutput << " - " << "Process 1: end " << actPtr->actionDescriptor << " output \n";
+
+   }   
+
+   // unrecognized action type
+   else 
+   {
+      actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
+      actionOutput << " - " << "Process 1: unrecognized action \n";
+
+   }   
+
+   // end thread
+   pthread_exit(0);
 }
