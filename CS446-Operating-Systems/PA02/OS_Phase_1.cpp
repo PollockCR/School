@@ -12,7 +12,6 @@
 
 // header files
    #include "Process_Control_Block.h" 
-   #include <sys/types.h> // used for process creation
    #include <fstream> // used for file input
    #include <iostream> // used for I/O
    #include <string> // used for string operations
@@ -30,17 +29,21 @@
    const int STD_LINE_LEN = 256;
    const int SPACE_BUF = 1;
    const int OP_COUNT = 5;
+   const int PRECISION = 6;
+   const float CYCLE_TO_MS = 0.001;
 
 // global variables
-   clock_t timer;
-   stringstream actionOutput;
+   clock_t timer; // keeps track of time
+   map<string, float> cycleData; // cycles per action
+   char logLocation; // location to log to
+   ofstream outputFile; // output file stream
 
 // function prototypes
-   bool saveConfig( char* configPath, float &phase, char* metaPath,
-      map<string, float>& cycleData, char* logLocation, char* logPath );
+   bool saveConfig( char* configPath, float &phase, char* metaPath, char* logPath );
    int saveMetaData( char* metaPath, PCB& process );
    void threadActions( PCB& process );
-   void *runner( void *actVoidPtr ); // threads call this function 
+   void *runner( void *actVoidPtr ); 
+   void printAction( stringstream& actionOutput ); 
 
 // main program
 int main( int argc, char* argv[] )
@@ -49,13 +52,14 @@ int main( int argc, char* argv[] )
    bool saveSucess;
    float phase = 0.0;
    char metaPath[ STD_LINE_LEN ];
-   map<string, float> cycleData;
-   char logLocation[ STD_STR_LEN ];
-   char logPath[ STD_LINE_LEN ];
+   char logPath[ STD_LINE_LEN ]; 
    int processCount = 0;
    PCB process;
 
    // STATE: Enter/Start
+
+      // set process state to enter
+      process.state = "Enter";
 
       // read in configuration file
 
@@ -70,7 +74,7 @@ int main( int argc, char* argv[] )
          }
 
          // save configuration information
-         saveSucess = saveConfig( argv[1], phase, metaPath, cycleData, logLocation, logPath );
+         saveSucess = saveConfig( argv[1], phase, metaPath, logPath );
 
          // check for failed save
          if( !saveSucess )
@@ -97,36 +101,73 @@ int main( int argc, char* argv[] )
 
    // STATE: Running
 
-      // start simulator
+      // change process to running
+      process.state = "Running";
+
+      // prepare for output 
+
+         // for file output 
+         if( logLocation != 'M' )
+         {
+            // open log file 
+            outputFile.open( logPath, ofstream::out | ofstream::trunc );
+
+            // check for valid file
+            if( !outputFile.is_open() )
+            {
+               // print failure 
+               cout << "Error in log file. Please try again." << endl;
+
+               // return failure
+               return 1;
+            }
+         }
+
+      // run simulator
       threadActions( process );
 
-         /*
-         // check for failed save
-         if( !saveSucess )
-         {
-            // print failure
-            cout << "Error in processing action. Please try again." << endl;
-
-            // return failure
-            return 1;
-         }      
-         */
-      
-      cout << actionOutput.str();
+      // for file output
+      if( logLocation != 'M' )
+      {
+         // close file
+         outputFile.close();      
+      }
 
    // STATE: Exit
+
+      // change process to exit
+      process.state = "Exit";
 
       // return success
       return 0;
 }
 
+
 // function implementation 
-bool saveConfig( char* configPath, float &phase, char* metaPath,
-   map<string, float>& cycleData, char* logLocation, char* logPath )
+
+/**
+saveConfig
+
+Saves configuration file information.
+First, opens file for input and ensures that it is valid.
+Ignores information where appropriate and saves information to
+appropriate location. Any errors in reading in data will cause 
+false to be returned. Valid data returns true. 
+
+@param configPath holds path to configuration file
+@param phase holds phase/version value
+@param metaPath holds path to meta-data file for saving later
+@param logPath holds path to log file, if needed
+@pre configPath was passed to program
+@post configuration information saved or error returned
+@return bool representing sucessful saving of configuration
+*/
+bool saveConfig( char* configPath, float &phase, char* metaPath, char* logPath )
 {
    // initialize variables
    ifstream configFile;
    float tempTime;
+   char tempPath[ STD_LINE_LEN ];
 
    // read in file
 
@@ -157,7 +198,7 @@ bool saveConfig( char* configPath, float &phase, char* metaPath,
          // read in processor cycle time
          configFile.ignore( STD_LINE_LEN, ':' );
          configFile >> tempTime;
-         cycleData[ "processor" ] = tempTime;
+         cycleData[ "run" ] = tempTime;
 
          // read in monitor display time
          configFile.ignore( STD_LINE_LEN, ':' );
@@ -182,10 +223,34 @@ bool saveConfig( char* configPath, float &phase, char* metaPath,
       // read in log location
       configFile.ignore( STD_LINE_LEN, ':' );
       configFile.ignore( SPACE_BUF, ' ' );
-      configFile.getline( logLocation, STD_LINE_LEN );
+      configFile.getline( tempPath, STD_LINE_LEN );
+
+         // log to monitor
+         if( strcmp( tempPath, "Log to Monitor" ) == 0 )
+         {
+            logLocation = 'M';
+         }
+
+         // log to both
+         else if( strcmp( tempPath, "Log to Both" ) == 0 )
+         {
+            logLocation = 'B';
+         }
+
+         // log to monitor
+         else if( strcmp( tempPath, "Log to File" ) == 0 )
+         {
+            logLocation = 'F';
+         }
+
+         // unrecognized location
+         else 
+         {
+            return false;
+         }
 
       // read in log file path
-      if( strcmp( logLocation, "Log to Monitor" ) != 0 )
+      if( logLocation  != 'M' )
       {
          configFile.ignore( STD_LINE_LEN, ':' );
          configFile.ignore( SPACE_BUF, ' ' );
@@ -206,6 +271,23 @@ bool saveConfig( char* configPath, float &phase, char* metaPath,
 
 }
 
+/**
+saveMetaData
+
+Saves meta-data file information.
+First, opens file for input and ensures that it is valid.
+Ignores information where appropriate and saves information to
+appropriate location. Actions are sent into a process control
+block and into a queue within the PCB. The number of seperate
+process programs is returned. For now this is either 0 (error),
+or 1 (success).
+
+@param metaPath holds path to meta-data file for saving later
+@param process process control block with process information
+@pre valid config information was saved
+@post configuration information saved or error returned
+@return int representing number of processes saved (1 or 0)
+*/
 int saveMetaData( char* metaPath, PCB& process )
 {
    // initialize variables
@@ -228,7 +310,7 @@ int saveMetaData( char* metaPath, PCB& process )
 
    // read in meta-data
 
-         // Read in start
+         // read in start - skip first line
          metaFile.ignore( STD_LINE_LEN, ';' );
          metaFile.ignore( SPACE_BUF, ' ' );         
 
@@ -269,7 +351,7 @@ int saveMetaData( char* metaPath, PCB& process )
                      // save meta-data for process action
                      metaFile.ignore( SPACE_BUF, '(' );
                      getline( metaFile, tempDescriptor, ')' );
-                     metaFile >> tempCycle;  
+                     metaFile >> tempCycle; 
 
                      // save data to temp process               
                      tempAction.actionType = tempType;
@@ -278,7 +360,6 @@ int saveMetaData( char* metaPath, PCB& process )
 
                      // queue process action 
                      process.actions.push_back( tempAction ); 
-                     // FOR TESTING, PRINT EACH ACTION
                   }
 
                   // unrecognized action
@@ -328,10 +409,25 @@ int saveMetaData( char* metaPath, PCB& process )
    // close meta-data file
    metaFile.close();
 
-   // return process count
+   // return process count - will only be 1 for now
    return processCount;
 }
 
+/**
+threadActions
+
+Creates threads for each action
+The start simulation action is executed, then processes actions in
+process control block in order of arrival from meta-data file. Lastly,
+the end simulation action is executed. Each action creates a thread
+and calls the runner function. Each thread is joined to previous threads
+upon exit. 
+
+@param process process control block with process information
+@pre valid config information and meta-data was saved
+@post each action in the PCB was executed via a thread
+@return void 
+*/
 void threadActions( PCB& process )
 {
    // initialize variables
@@ -339,23 +435,19 @@ void threadActions( PCB& process )
    pthread_t tids[ tidCount ]; // an array of threads to be joined
    pthread_attr_t attr;
    void* actVoidPtr;
-   int err;
    int tidIndex = 0;
-   int actionIndex;
 
    // create start and end actions
    Action startAction('S', "start", 0);
    Action endAction( 'S', "end", 0);
 
-   // set time output   
-   actionOutput.precision(6);
-   actionOutput << fixed;    
+   // set time output      
    timer = clock();   
 
    // get the default attributes
    pthread_attr_init(&attr);
 
-   // complete actions
+   // thread each action
 
       // thread system start
       actVoidPtr = &startAction;
@@ -386,12 +478,37 @@ void threadActions( PCB& process )
       pthread_join( tids[ tidIndex ], NULL );          
 }
 
+/**
+runner
+
+Simulates execution of action.
+Each thread calls this function upon its creation in threadActions(). 
+Each thread prints appropriate information by calling printAction(),
+waits until it has completed the appropriate cycle time and then ends.
+
+@param void pointer to the current action
+@pre a valid action is given
+@post action is completed and logged
+@return void
+*/
 void *runner( void* actVoidPtr )
 {
    // initialize variables
 
       // set void pointer to Action pointer
       Action* actPtr = static_cast<Action*>( actVoidPtr );
+
+      // prepare output string
+      stringstream actionOutput;
+      actionOutput.precision( PRECISION );
+      actionOutput << fixed; 
+
+      // action start time
+      float floatTime;
+      float runTime;
+
+      // action run duration 
+      runTime = actPtr->actionCycle * (cycleData[ actPtr->actionDescriptor ]) * CYCLE_TO_MS;
 
    // system action type
    if( actPtr->actionType == 'S' )
@@ -401,6 +518,7 @@ void *runner( void* actVoidPtr )
       {
          actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
          actionOutput << " - " << "Simulator program starting \n";
+         printAction( actionOutput );
       }
 
       // end system descriptor
@@ -408,6 +526,7 @@ void *runner( void* actVoidPtr )
       {
          actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
          actionOutput << " - " << "Simulator program ending \n";
+         printAction( actionOutput );
       }
 
    }
@@ -420,16 +539,19 @@ void *runner( void* actVoidPtr )
       {
          actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
          actionOutput << " - " << "OS: preparing process 1 \n";
+         printAction( actionOutput );
 
          actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
          actionOutput << " - " << "OS: starting process 1 \n";   
+         printAction( actionOutput );
       }      
 
       // end application descriptor
       else
       {
          actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
-         actionOutput << " - " << "OS: removing process 1 \n";         
+         actionOutput << " - " << "OS: removing process 1 \n";    
+         printAction( actionOutput );     
       }
        
    }
@@ -437,48 +559,61 @@ void *runner( void* actVoidPtr )
    // process action type
    else if( actPtr->actionType == 'P' )
    {
+      // set current time
+      floatTime = ((float)(clock() - timer)/CLOCKS_PER_SEC);
+
       // run application descriptor start
       actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
       actionOutput << " - " << "Process 1: start processing action \n"; 
-      
+      printAction( actionOutput );
+
       // run for specified time
-      /////////////////////// !!!!
+      while( ((float)(clock()-timer)/CLOCKS_PER_SEC) < (floatTime + runTime) ); // busy wait
 
       // run application desciptor end 
       actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
       actionOutput << " - " << "Process 1: end processing action \n";
-
+      printAction( actionOutput );      
    }
 
    // input action type
    else if( actPtr->actionType == 'I' )
    {
+      // set current time
+      floatTime = ((float)(clock() - timer)/CLOCKS_PER_SEC);
+
       // input descriptor start
       actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
       actionOutput << " - " << "Process 1: start " << actPtr->actionDescriptor << " input \n"; 
-      
+      printAction( actionOutput );
+
       // run for specified time
-      /////////////////////// !!!!
+      while( ((float)(clock()-timer)/CLOCKS_PER_SEC) < (floatTime + runTime) ); // busy wait
 
       // input desciptor end 
       actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
       actionOutput << " - " << "Process 1: end " << actPtr->actionDescriptor << " input \n";
+      printAction( actionOutput );
    }
 
    // output action type
    else if( actPtr->actionType == 'O' )
    {
+      // set current time
+      floatTime = ((float)(clock() - timer)/CLOCKS_PER_SEC);
+
       // output descriptor start
       actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
       actionOutput << " - " << "Process 1: start " << actPtr->actionDescriptor << " output \n"; 
+      printAction( actionOutput );
       
       // run for specified time
-      /////////////////////// !!!!
+      while( ((float)(clock()-timer)/CLOCKS_PER_SEC) < (floatTime + runTime) ); // busy wait
 
       // output desciptor end 
       actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
       actionOutput << " - " << "Process 1: end " << actPtr->actionDescriptor << " output \n";
-
+      printAction( actionOutput );
    }   
 
    // unrecognized action type
@@ -486,9 +621,41 @@ void *runner( void* actVoidPtr )
    {
       actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
       actionOutput << " - " << "Process 1: unrecognized action \n";
-
+      printAction( actionOutput );
    }   
 
    // end thread
    pthread_exit(0);
 }
+
+/**
+printAction
+
+Prints information for action.
+Logs the passed string stream to appropriate location(s) and 
+clears the string stream. 
+
+@param actionOutput stringstream holds information to be logged
+@pre none
+@post actionOutput was logged appropriately 
+@return none
+*/
+void printAction( stringstream& actionOutput )
+{
+   // print to console
+   if( logLocation == 'M' || logLocation == 'B' )
+   {
+      cout << actionOutput.str();
+   }
+
+   // print to file
+   if( logLocation == 'F' || logLocation == 'B' )
+   {
+      outputFile << actionOutput.str();
+   }
+
+   // clear string stream
+   actionOutput.str( string() );
+   actionOutput.clear();
+}
+

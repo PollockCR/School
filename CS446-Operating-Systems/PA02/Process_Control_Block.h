@@ -10,7 +10,6 @@
    #define __PCB_H_
 
 // header files
-   #include <sys/types.h> // used for process creation
    #include <fstream> // used for file input
    #include <iostream> // used for I/O
    #include <string> // used for string operations
@@ -19,6 +18,7 @@
    #include <ctime> // used to keep track of time
    #include <map> // used for cylce times
    #include <list> // used for process actions
+   #include <pthread.h> // used for threads 
 
    using namespace std;
 
@@ -31,10 +31,10 @@ class Action
 {
    public:
       Action();
-      Action( char type, string descriptor, int cycle );
+      Action( char type, string descriptor, float cycle );
       char actionType;
       string actionDescriptor;
-      int actionCycle;
+      float actionCycle;
    private:      
 };
 
@@ -48,7 +48,5 @@ class PCB
       list<Action> actions;
    private:
 };
-
-
 
 #endif
