@@ -1,0 +1,25 @@
+0.000062 - Simulator program starting 
+0.000240 - OS: preparing process 1 
+0.000251 - OS: starting process 1 
+0.000289 - Process 1: start hard drive input 
+0.400317 - Process 1: end hard drive input 
+0.400526 - Process 1: start monitor output 
+0.650526 - Process 1: end monitor output 
+0.650641 - Process 1: start keyboard input 
+12.650642 - Process 1: end keyboard input 
+12.650769 - Process 1: start printer output 
+19.650770 - Process 1: end printer output 
+19.650894 - Process 1: start hard drive input 
+19.950895 - Process 1: end hard drive input 
+19.951019 - Process 1: start hard drive output 
+20.451019 - Process 1: end hard drive output 
+20.451157 - Process 1: start hard drive input 
+20.851156 - Process 1: end hard drive input 
+20.851288 - Process 1: start hard drive output 
+21.351397 - Process 1: end hard drive output 
+21.351624 - Process 1: start processing action 
+21.491625 - Process 1: end processing action 
+21.491768 - Process 1: start keyboard input 
+32.491768 - Process 1: end keyboard input 
+32.491898 - OS: removing process 1 
+32.491943 - Simulator program ending 
