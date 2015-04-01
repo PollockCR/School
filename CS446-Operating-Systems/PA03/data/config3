@@ -1,0 +1,12 @@
+Start Simulator Configuration File
+Version/Phase: 2.0
+File Path: /nfs/home/cpollock/Desktop/PA03_831835/data/meta3
+CPU Scheduling: SJF
+Processor cycle time (msec): 20
+Monitor display time (msec): 20
+Hard drive cycle time (msec): 20
+Printer cycle time (msec): 20
+Keyboard cycle time (msec): 20
+Log: Log to Monitor
+Log File Path: /nfs/home/cpollock/Desktop/PA03_831835/data/log
+End Simulator Configuration File

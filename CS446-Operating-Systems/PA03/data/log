@@ -1,0 +1,68 @@
+0.000001 - Simulator program starting 
+0.000097 - OS: preparing all processes 
+0.000113 - OS: selecting next process 
+0.000311 - OS: starting process 1
+0.000576 - Process 1: start keyboard input 
+0.500575 - Process 1: end keyboard input 
+0.500691 - Process 1: start hard drive output 
+1.200691 - Process 1: end hard drive output 
+1.200816 - Process 1: start processing action 
+1.310815 - Process 1: end processing action 
+1.310926 - Process 1: start processing action 
+1.420925 - Process 1: end processing action 
+1.421061 - Process 1: start hard drive input 
+2.121063 - Process 1: end hard drive input 
+2.121183 - OS: removing process 1
+2.121220 - OS: selecting next process 
+2.121304 - OS: starting process 2
+2.121402 - Process 2: start processing action 
+2.201402 - Process 2: end processing action 
+2.201563 - Process 2: start monitor output 
+2.401562 - Process 2: end monitor output 
+2.401746 - Process 2: start keyboard input 
+3.101746 - Process 2: end keyboard input 
+3.101880 - Process 2: start processing action 
+3.231881 - Process 2: end processing action 
+3.232114 - Process 2: start hard drive output 
+3.532113 - Process 2: end hard drive output 
+3.532236 - OS: removing process 2
+3.532277 - OS: selecting next process 
+3.532354 - OS: starting process 3
+3.532429 - Process 3: start hard drive input 
+3.782429 - Process 3: end hard drive input 
+3.782649 - Process 3: start processing action 
+3.832648 - Process 3: end processing action 
+3.832902 - Process 3: start hard drive output 
+4.082901 - Process 3: end hard drive output 
+4.083093 - Process 3: start keyboard input 
+5.583093 - Process 3: end keyboard input 
+5.583401 - Process 3: start hard drive output 
+6.083400 - Process 3: end hard drive output 
+6.083580 - OS: removing process 3
+6.083628 - OS: selecting next process 
+6.083711 - OS: starting process 4
+6.083826 - Process 4: start processing action 
+6.153826 - Process 4: end processing action 
+6.153970 - Process 4: start processing action 
+6.303970 - Process 4: end processing action 
+6.304312 - Process 4: start hard drive input 
+7.004313 - Process 4: end hard drive input 
+7.004474 - Process 4: start monitor output 
+7.129476 - Process 4: end monitor output 
+7.129650 - Process 4: start processing action 
+7.259650 - Process 4: end processing action 
+7.259940 - OS: removing process 4
+7.259982 - OS: selecting next process 
+7.260046 - OS: starting process 5
+7.260122 - Process 5: start keyboard input 
+8.260122 - Process 5: end keyboard input 
+8.260354 - Process 5: start monitor output 
+8.535354 - Process 5: end monitor output 
+8.535631 - Process 5: start hard drive input 
+9.035631 - Process 5: end hard drive input 
+9.035793 - Process 5: start monitor output 
+9.360792 - Process 5: end monitor output 
+9.361105 - Process 5: start hard drive input 
+10.061104 - Process 5: end hard drive input 
+10.061248 - OS: removing process 5
+10.061288 - Simulator program ending 
