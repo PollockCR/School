@@ -14,13 +14,13 @@
    #include <iostream> // used for I/O
    #include <string> // used for string operations
    #include <cstring> // used for c string operations
-   #include <sstream> // used for string streams 
+   #include <sstream> // used for string streams
    #include <ctime> // used to keep track of time
    #include <map> // used for cylce times
    #include <list> // used to store processes
    #include <queue> // used to store process actions
    #include <algorithm> // used for finding min
-   #include <pthread.h> // used for threads 
+   #include <pthread.h> // used for threads
 
    using namespace std;
 

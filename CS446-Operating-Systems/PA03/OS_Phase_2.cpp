@@ -95,7 +95,7 @@ int main( int argc, char* argv[] )
       processCount = saveMetaData( metaPath, processes );
 
          // check for invalid meta-data
-         if( processCount < 1 )
+         if( processCount < 0 )
          {
             // return failure
             return 1;            
@@ -121,7 +121,7 @@ int main( int argc, char* argv[] )
                return 1;
             }
          }
-//cout << "Process count: " << processCount << endl;
+
       // run simulator
       runProcesses( processes );
 
@@ -213,27 +213,52 @@ bool saveConfig( char* configPath, float &phase, char* metaPath, char* logPath )
          // read in processor cycle time
          configFile.ignore( STD_LINE_LEN, ':' );
          configFile >> tempTime;
-         cycleData[ "run" ] = tempTime;
+
+            // check for valid time
+            if( tempTime >= 0 )
+            {
+               cycleData[ "run" ] = tempTime;
+            }
 
          // read in monitor display time
          configFile.ignore( STD_LINE_LEN, ':' );
          configFile >> tempTime;
-         cycleData[ "monitor" ] = tempTime;
+
+            // check for valid time
+            if( tempTime >= 0 )
+            {
+               cycleData[ "monitor" ] = tempTime;
+            }
 
          // read in hard drive cycle time
          configFile.ignore( STD_LINE_LEN, ':' );
          configFile >> tempTime;
-         cycleData[ "hard drive" ] = tempTime;         
 
+            // check for valid time
+            if( tempTime >= 0 )
+            {
+               cycleData[ "hard drive" ] = tempTime;
+            }
+        
          // read in printer cycle time 
          configFile.ignore( STD_LINE_LEN, ':' );
          configFile >> tempTime;
-         cycleData[ "printer" ] = tempTime;         
 
+            // check for valid time
+            if( tempTime >= 0 )
+            {
+               cycleData[ "printer" ] = tempTime;
+            }
+        
          // read in keyboard cycle time
          configFile.ignore( STD_LINE_LEN, ':' );
          configFile >> tempTime;
-         cycleData[ "keyboard" ] = tempTime;         
+
+            // check for valid time
+            if( tempTime >= 0 )
+            {
+               cycleData[ "keyboard" ] = tempTime;
+            }
          
       // ignore until after "Log to "
       configFile.ignore( STD_LINE_LEN, ':' );
@@ -308,8 +333,8 @@ int saveMetaData( char* metaPath, list<PCB>& processes )
          // print failure
          cout << "Error in meta-data file. Please try again." << endl;
 
-         // return 0 process count
-         return processCount;
+         // return invalid meta-data
+         return -1;
       }   
 
    // read in meta-data
@@ -327,7 +352,7 @@ int saveMetaData( char* metaPath, list<PCB>& processes )
             cout << "Error in meta-data. OS start failure. Please try again." << endl;      
 
             // return invalid meta-data
-            return 0;
+            return -1;
          }
 
          // skip first line
@@ -347,6 +372,9 @@ int saveMetaData( char* metaPath, list<PCB>& processes )
 
                // create process with pid equal to process number
                PCB *tempProcess = new PCB( processCount+1 );
+
+               // set process to enter state 
+               tempProcess->state = "Enter";
 
                // queue start action
                tempAction.actionType = tempType;
@@ -386,7 +414,7 @@ int saveMetaData( char* metaPath, list<PCB>& processes )
                         cout << "Error in meta-data. Unrecognized action cycle count found. Please try again." << endl;
 
                         // return no saved processes
-                        return 0;                        
+                        return -1;                        
                      } 
                      if( tempDescriptor != "monitor" && tempDescriptor != "keyboard" &&
                          tempDescriptor != "run" && tempDescriptor != "hard drive" &&
@@ -396,7 +424,7 @@ int saveMetaData( char* metaPath, list<PCB>& processes )
                         cout << "Error in meta-data. Unrecognized action descriptor found. Please try again." << endl;
 
                         // return no saved processes
-                        return 0;                        
+                        return -1;                        
                      }
 
                   // save data to temp process               
@@ -419,7 +447,7 @@ int saveMetaData( char* metaPath, list<PCB>& processes )
                   cout << "Error in meta-data. Unrecognized action found. Please try again." << endl;
 
                   // return no saved processes
-                  return 0;
+                  return -1;
                }
 
                // move to next action
@@ -447,7 +475,10 @@ int saveMetaData( char* metaPath, list<PCB>& processes )
                tempProcess->actions.push( tempAction );
 
                // increment successful process save
-               processCount++;                  
+               processCount++;  
+
+               // set process to ready state 
+               tempProcess->state = "Ready";
 
                // add process to list
                processes.push_back( *tempProcess );
@@ -478,21 +509,19 @@ int saveMetaData( char* metaPath, list<PCB>& processes )
             cout << "Error in meta-data. Process start/end failure. Please try again." << endl;
 
             // return no saved processes
-            return 0;
+            return -1;
          }
       }
 
-      // check for invalid data given
+      // check for invalid end action
+      if( tempType != 'S' )
+      {
+         // print failure
+         cout << "Error in meta-data. OS end failure. Please try again." << endl;      
 
-         // check for invalid end command
-         if( tempType != 'S' )
-         {
-            // print failure
-            cout << "Error in meta-data. OS end failure. Please try again." << endl;      
-
-            // return invalid simulation end
-            return 0;
-         }
+         // return invalid simulation end
+         return -1;
+      }
 
    // close meta-data file
    metaFile.close();
@@ -501,6 +530,19 @@ int saveMetaData( char* metaPath, list<PCB>& processes )
    return processCount;
 }
 
+/**
+runProcesses
+
+Runs queue of processes according to given scheduling code. 
+Can run in either FIFO, SJF, or STRF modes. Each process is
+selected and passed to threadActions to be executed. Output
+is printed with printAction for each process. 
+
+@param processes a list of process control blocks to be executed
+@pre valid config information and meta-data was saved
+@post each PCB in the list was executed according to scheduling code
+@return void 
+*/
 void runProcesses( list<PCB>& processes )
 {
    // initialize variables
@@ -532,13 +574,19 @@ void runProcesses( list<PCB>& processes )
          // dequeue each process and run
          while( !processes.empty() )
          {
-            // output preparing processes
+            // prepare processes
             actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
             actionOutput << " - " << "OS: selecting next process \n";
             printAction( actionOutput );    
 
+            // change process to running state
+            (processes.front()).state = "Running";
+
             // execute process
             threadActions( *(processes.begin()) );
+
+            // change process to exit state
+            (processes.front()).state = "Exit";            
 
             // remove process
             processes.pop_front();            
@@ -559,8 +607,14 @@ void runProcesses( list<PCB>& processes )
             actionOutput << " - " << "OS: selecting next process \n";
             printAction( actionOutput ); 
 
+            // change process to running state
+            (processes.front()).state = "Running";            
+
             // execute process
             threadActions( *(processes.begin()) );
+
+            // change process to exit state
+            (processes.front()).state = "Exit";   
 
             // remove process
             processes.pop_front();
@@ -576,13 +630,32 @@ void runProcesses( list<PCB>& processes )
             // output preparing processes
             actionOutput << ((float)(clock()-timer)/CLOCKS_PER_SEC);
             actionOutput << " - " << "OS: selecting next process \n";
-            printAction( actionOutput ); 
+            printAction( actionOutput );             
 
-            // find min process
-            minProcess = min_element( processes.begin(), processes.end(), compareRuntimes );
+            // run process
 
-            // execute process
-            threadActions( *minProcess );
+               // check for > 1 process
+               if( processes.size() > 1 )
+               {
+                  // find minimum process
+                  minProcess = min_element( processes.begin(), processes.end(), compareRuntimes );
+               }
+
+               // for one process
+               else
+               {
+                  // set process to execute
+                  minProcess = processes.begin();
+               }
+
+               // change process to running state
+               minProcess->state = "Running";                
+             
+               // execute process
+               threadActions( *minProcess );
+
+            // change process to exit state
+            minProcess->state = "Exit";           
 
             // remove process
             processes.erase( minProcess );
@@ -595,12 +668,25 @@ void runProcesses( list<PCB>& processes )
    printAction( actionOutput );
 }
 
+/**
+compareRuntimes
+
+Compares estimated run times of two processes and returns
+true if first process has lower (or equal) runtime as process
+two, false otherwise. 
+
+@param first process to compare
+@param second process to compare
+@pre processes have been created and have estimated runtimes
+@post processes' estimated runtimes were compared
+@return bool indicating run time was lower for first process 
+*/
 bool compareRuntimes( const PCB& first, const PCB& second )
 {
+   // return true if first PCB has lower (or same) estimated runtime
+   // than second PCB, false otherwise
    return( first.estimatedRuntime <= second.estimatedRuntime );
 }
-
-
 
 /**
 threadActions
