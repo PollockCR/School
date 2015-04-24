@@ -1,0 +1,13 @@
+Start Simulator Configuration File
+Version/Phase: 2.0
+File Path: /nfs/home/cpollock/Desktop/data/meta2
+CPU Scheduling: FIFO-P
+Quantum time (cycles): 6
+Processor cycle time (msec): 10
+Monitor display time (msec): 25
+Hard drive cycle time (msec): 50
+Printer cycle time (msec): 500
+Keyboard cycle time (msec): 1000
+Log: Log to File
+Log File Path: /nfs/home/cpollock/Desktop/data/log
+End Simulator Configuration File

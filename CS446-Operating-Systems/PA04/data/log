@@ -1,0 +1,365 @@
+0.000001 - Simulator program starting 
+0.000067 - OS: preparing all processes 
+0.000075 - OS: selecting next process 
+0.000155 - OS: preparing process 1
+0.000259 - OS: selecting next process 
+0.000312 - OS: preparing process 2
+0.000347 - OS: selecting next process 
+0.000410 - OS: preparing process 3
+0.000492 - OS: selecting next process 
+0.000631 - OS: preparing process 4
+0.000698 - OS: selecting next process 
+0.000749 - OS: preparing process 5
+0.000824 - OS: selecting next process 
+0.000927 - Process 1: start printer output 
+0.014928 - Process 1 : block printer output 
+0.015058 - OS: selecting next process 
+0.015143 - Process 2: start keyboard input 
+0.435142 - Process 2 : block keyboard input 
+0.435234 - OS: selecting next process 
+0.435295 - Process 3: start processing action 
+1.935295 - Process 3 : block processing action 
+1.935374 - OS: selecting next process 
+1.935483 - Process 4: start hard drive output 
+2.035483 - Process 4 : block hard drive output 
+2.035566 - OS: selecting next process 
+2.035621 - Process 5: start processing action 
+4.135621 - Process 5 : block processing action 
+4.135687 - OS: selecting next process 
+4.135734 - Process 1: start printer output 
+4.147733 - Process 1: end printer output 
+4.147782 - OS: selecting next process 
+4.147821 - Process 2: start keyboard input 
+4.387821 - Process 2 : block keyboard input 
+4.387888 - OS: selecting next process 
+4.387936 - Process 3: start processing action 
+5.287936 - Process 3: end processing action 
+5.288018 - OS: selecting next process 
+5.288105 - Process 4: start hard drive output 
+5.348105 - Process 4: end hard drive output 
+5.348208 - OS: selecting next process 
+5.348286 - Process 5: start processing action 
+6.548287 - Process 5 : block processing action 
+6.548369 - OS: selecting next process 
+6.548460 - Process 1: start keyboard input 
+6.728460 - Process 1 : block keyboard input 
+6.728542 - OS: selecting next process 
+6.728611 - Process 2: start keyboard input 
+6.908611 - Process 2: end keyboard input 
+6.908730 - OS: selecting next process 
+6.908799 - Process 3: start processing action 
+8.408799 - Process 3 : block processing action 
+8.408883 - OS: selecting next process 
+8.408952 - Process 4: start processing action 
+10.508952 - Process 4 : block processing action 
+10.509052 - OS: selecting next process 
+10.509149 - Process 5: start processing action 
+11.409148 - Process 5: end processing action 
+11.409230 - OS: selecting next process 
+11.409330 - Process 1: start hard drive output 
+11.509330 - Process 1 : block hard drive output 
+11.509421 - OS: selecting next process 
+11.509531 - Process 2: start processing action 
+13.459531 - Process 2 : block processing action 
+13.459615 - OS: selecting next process 
+13.459722 - Process 3: start processing action 
+14.359726 - Process 3: end processing action 
+14.359817 - OS: selecting next process 
+14.359926 - Process 4: start processing action 
+15.559925 - Process 4 : block processing action 
+15.559999 - OS: selecting next process 
+15.560080 - Process 5: start hard drive input 
+15.710143 - Process 5 : block hard drive input 
+15.710263 - OS: selecting next process 
+15.710298 - Process 1: start hard drive output 
+15.770298 - Process 1: end hard drive output 
+15.770360 - OS: selecting next process 
+15.770399 - Process 2: start processing action 
+16.820398 - Process 2 : block processing action 
+16.820475 - OS: selecting next process 
+16.820524 - Process 3: start processing action 
+18.020527 - Process 3 : block processing action 
+18.020611 - OS: selecting next process 
+18.020704 - Process 4: start processing action 
+18.920704 - Process 4: end processing action 
+18.920797 - OS: selecting next process 
+18.920900 - Process 5: start hard drive input 
+19.010900 - Process 5 : block hard drive input 
+19.010971 - OS: selecting next process 
+19.011011 - Process 1: start keyboard input 
+19.311010 - Process 1 : block keyboard input 
+19.311071 - OS: selecting next process 
+19.311115 - Process 2: start processing action 
+20.211121 - Process 2: end processing action 
+20.211212 - OS: selecting next process 
+20.211267 - Process 3: start processing action 
+21.111265 - Process 3: end processing action 
+21.111397 - OS: selecting next process 
+21.111460 - Process 4: start processing action 
+22.761459 - Process 4 : block processing action 
+22.761532 - OS: selecting next process 
+22.761589 - Process 5: start hard drive input 
+22.821587 - Process 5: end hard drive input 
+22.821680 - OS: selecting next process 
+22.821716 - Process 1: start keyboard input 
+23.001717 - Process 1: end keyboard input 
+23.001823 - OS: selecting next process 
+23.001877 - Process 2: start processing action 
+24.801874 - Process 2 : block processing action 
+24.801943 - OS: selecting next process 
+24.801985 - Process 3: start processing action 
+26.601984 - Process 3 : block processing action 
+26.602068 - OS: selecting next process 
+26.602116 - Process 4: start processing action 
+27.502115 - Process 4: end processing action 
+27.502188 - OS: selecting next process 
+27.502266 - Process 5: start processing action 
+29.602266 - Process 5 : block processing action 
+29.602343 - OS: selecting next process 
+29.602425 - Process 1: start hard drive output 
+29.742424 - Process 1 : block hard drive output 
+29.742498 - OS: selecting next process 
+29.742573 - Process 2: start processing action 
+30.642572 - Process 2 : block processing action 
+30.642656 - OS: selecting next process 
+30.642752 - Process 3: start processing action 
+31.542751 - Process 3 : block processing action 
+31.542873 - OS: selecting next process 
+31.542940 - Process 4: start processing action 
+32.892941 - Process 4 : block processing action 
+32.893024 - OS: selecting next process 
+32.893147 - Process 5: start processing action 
+34.093147 - Process 5 : block processing action 
+34.093231 - OS: selecting next process 
+34.093296 - Process 1: start hard drive output 
+34.173298 - Process 1 : block hard drive output 
+34.173367 - OS: selecting next process 
+34.173405 - Process 2: start processing action 
+35.223404 - Process 2 : block processing action 
+35.223484 - OS: selecting next process 
+35.223522 - Process 3: start keyboard input 
+35.463524 - Process 3 : block keyboard input 
+35.463623 - OS: selecting next process 
+35.463661 - Process 4: start processing action 
+36.363663 - Process 4: end processing action 
+36.363766 - OS: selecting next process 
+36.363808 - Process 5: start processing action 
+37.263817 - Process 5: end processing action 
+37.263908 - OS: selecting next process 
+37.263981 - Process 1: start hard drive output 
+37.323982 - Process 1: end hard drive output 
+37.324074 - OS: selecting next process 
+37.324154 - Process 2: start processing action 
+38.224155 - Process 2: end processing action 
+38.224228 - OS: selecting next process 
+38.224277 - Process 3: start keyboard input 
+38.404278 - Process 3: end keyboard input 
+38.404346 - OS: selecting next process 
+38.404449 - Process 4: start keyboard input 
+38.734451 - Process 4 : block keyboard input 
+38.734524 - OS: selecting next process 
+38.734608 - Process 5: start monitor output 
+39.214607 - Process 5 : block monitor output 
+39.214680 - OS: selecting next process 
+39.214729 - Process 1: start hard drive input 
+39.354729 - Process 1 : block hard drive input 
+39.354820 - OS: selecting next process 
+39.354897 - Process 2: start monitor output 
+39.954895 - Process 2 : block monitor output 
+39.954967 - OS: selecting next process 
+39.955044 - Process 3: start monitor output 
+40.435043 - Process 3 : block monitor output 
+40.435116 - OS: selecting next process 
+40.435196 - Process 4: start keyboard input 
+40.615192 - Process 4: end keyboard input 
+40.615330 - OS: selecting next process 
+40.615376 - Process 5: start monitor output 
+40.975376 - Process 5: end monitor output 
+40.975449 - OS: selecting next process 
+40.975533 - Process 1: start hard drive input 
+41.055534 - Process 1 : block hard drive input 
+41.055607 - OS: selecting next process 
+41.055653 - Process 2: start monitor output 
+41.415653 - Process 2: end monitor output 
+41.415749 - OS: selecting next process 
+41.415783 - Process 3: start monitor output 
+41.775784 - Process 3: end monitor output 
+41.775867 - OS: selecting next process 
+41.775982 - Process 4: start processing action 
+43.575981 - Process 4 : block processing action 
+43.576050 - OS: selecting next process 
+43.576096 - Process 5: start processing action 
+44.476097 - Process 5 : block processing action 
+44.476170 - OS: selecting next process 
+44.476219 - Process 1: start hard drive input 
+44.536221 - Process 1: end hard drive input 
+44.536282 - OS: selecting next process 
+44.536327 - Process 2: start keyboard input 
+44.746326 - Process 2 : block keyboard input 
+44.746449 - OS: selecting next process 
+44.746536 - Process 3: start hard drive input 
+44.886536 - Process 3 : block hard drive input 
+44.886673 - OS: selecting next process 
+44.886753 - Process 4: start processing action 
+45.786755 - Process 4 : block processing action 
+45.786873 - OS: selecting next process 
+45.786922 - Process 5: start processing action 
+47.436924 - Process 5 : block processing action 
+47.437008 - OS: selecting next process 
+47.437092 - Process 1: start monitor output 
+48.037090 - Process 1 : block monitor output 
+48.037167 - OS: selecting next process 
+48.037247 - Process 2: start keyboard input 
+48.217247 - Process 2: end keyboard input 
+48.217327 - OS: selecting next process 
+48.217396 - Process 3: start hard drive input 
+48.297398 - Process 3 : block hard drive input 
+48.297489 - OS: selecting next process 
+48.297546 - Process 4: start hard drive output 
+48.427547 - Process 4 : block hard drive output 
+48.427608 - OS: selecting next process 
+48.427662 - Process 5: start processing action 
+49.327663 - Process 5: end processing action 
+49.327724 - OS: selecting next process 
+49.327812 - Process 1: start monitor output 
+49.687813 - Process 1: end monitor output 
+49.687885 - OS: selecting next process 
+49.687992 - Process 2: start hard drive output 
+49.827991 - Process 2 : block hard drive output 
+49.828072 - OS: selecting next process 
+49.828156 - Process 3: start hard drive input 
+49.888161 - Process 3: end hard drive input 
+49.888226 - OS: selecting next process 
+49.888264 - Process 4: start hard drive output 
+49.958263 - Process 4 : block hard drive output 
+49.958336 - OS: selecting next process 
+49.958366 - Process 5: start keyboard input 
+50.288368 - Process 5 : block keyboard input 
+50.288425 - OS: selecting next process 
+50.288467 - Process 1: start hard drive input 
+50.408501 - Process 1 : block hard drive input 
+50.408585 - OS: selecting next process 
+50.408844 - Process 2: start hard drive output 
+50.488846 - Process 2 : block hard drive output 
+50.488899 - OS: selecting next process 
+50.488937 - Process 3: start hard drive output 
+50.628937 - Process 3 : block hard drive output 
+50.628990 - OS: selecting next process 
+50.629032 - Process 4: start hard drive output 
+50.689034 - Process 4: end hard drive output 
+50.689087 - OS: selecting next process 
+50.689137 - Process 5: start keyboard input 
+50.869137 - Process 5: end keyboard input 
+50.869244 - OS: selecting next process 
+50.869286 - Process 1: start hard drive input 
+50.929287 - Process 1 : block hard drive input 
+50.929344 - OS: selecting next process 
+50.929394 - Process 2: start hard drive output 
+50.989395 - Process 2: end hard drive output 
+50.989506 - OS: selecting next process 
+50.989544 - Process 3: start hard drive output 
+51.069546 - Process 3 : block hard drive output 
+51.069611 - OS: selecting next process 
+51.069656 - Process 4: start keyboard input 
+51.249657 - Process 4 : block keyboard input 
+51.249729 - OS: selecting next process 
+51.249790 - Process 5: start monitor output 
+51.609791 - Process 5 : block monitor output 
+51.609848 - OS: selecting next process 
+51.609894 - Process 1: start monitor output 
+52.209892 - Process 1 : block monitor output 
+52.209949 - OS: selecting next process 
+52.209984 - Process 2: start hard drive input 
+52.289986 - Process 2 : block hard drive input 
+52.290039 - OS: selecting next process 
+52.290085 - Process 3: start hard drive output 
+52.350086 - Process 3: end hard drive output 
+52.350147 - OS: selecting next process 
+52.350185 - Process 4: start monitor output 
+53.130184 - Process 4 : block monitor output 
+53.130241 - OS: selecting next process 
+53.130287 - Process 5: start processing action 
+55.080288 - Process 5 : block processing action 
+55.080345 - OS: selecting next process 
+55.080391 - Process 1: start monitor output 
+55.440392 - Process 1: end monitor output 
+55.440449 - OS: selecting next process 
+55.440487 - Process 2: start hard drive input 
+55.500488 - Process 2: end hard drive input 
+55.500587 - OS: selecting next process 
+55.500690 - Process 3: start keyboard input 
+55.860691 - Process 3 : block keyboard input 
+55.860767 - OS: selecting next process 
+55.860832 - Process 4: start monitor output 
+56.280830 - Process 4 : block monitor output 
+56.280918 - OS: selecting next process 
+56.280960 - Process 5: start processing action 
+57.330959 - Process 5 : block processing action 
+57.331032 - OS: selecting next process 
+57.331131 - Process 1: start processing action 
+58.231144 - Process 1: end processing action 
+58.231228 - OS: selecting next process 
+58.231258 - Process 2: start monitor output 
+59.071259 - Process 2 : block monitor output 
+59.071316 - OS: selecting next process 
+59.071369 - Process 3: start keyboard input 
+59.251369 - Process 3 : block keyboard input 
+59.251457 - OS: selecting next process 
+59.251568 - Process 4: start monitor output 
+59.611568 - Process 4: end monitor output 
+59.611652 - OS: selecting next process 
+59.611717 - Process 5: start processing action 
+60.511719 - Process 5: end processing action 
+60.511814 - OS: selecting next process 
+60.511883 - Process 1: start processing action 
+62.161884 - Process 1 : block processing action 
+62.161961 - OS: selecting next process 
+62.162037 - Process 2: start monitor output 
+62.642036 - Process 2 : block monitor output 
+62.642120 - OS: selecting next process 
+62.642216 - Process 3: start processing action 
+64.292213 - Process 3 : block processing action 
+64.292282 - OS: selecting next process 
+64.292336 - Process 4: start processing action 
+66.092339 - Process 4 : block processing action 
+66.092422 - OS: selecting next process 
+66.092522 - Process 5: start hard drive input 
+66.242523 - Process 5 : block hard drive input 
+66.242607 - OS: selecting next process 
+66.242676 - Process 1: start processing action 
+67.142677 - Process 1: end processing action 
+67.142776 - OS: selecting next process 
+67.142838 - Process 2: start monitor output 
+67.502831 - Process 2: end monitor output 
+67.502922 - OS: selecting next process 
+67.502975 - Process 3: start processing action 
+68.402977 - Process 3: end processing action 
+68.403099 - OS: selecting next process 
+68.403168 - Process 4: start processing action 
+69.303169 - Process 4 : block processing action 
+69.303253 - OS: selecting next process 
+69.303314 - Process 5: start hard drive input 
+69.393311 - Process 5 : block hard drive input 
+69.393402 - OS: selecting next process 
+69.393440 - OS: removing process 1
+69.393463 - OS: selecting next process 
+69.393517 - Process 2: start processing action 
+71.343513 - Process 2 : block processing action 
+71.343567 - OS: selecting next process 
+71.343620 - OS: removing process 3
+71.343666 - OS: selecting next process 
+71.343697 - OS: removing process 4
+71.343742 - OS: selecting next process 
+71.343758 - Process 5: start hard drive input 
+71.403755 - Process 5: end hard drive input 
+71.403824 - OS: selecting next process 
+71.403854 - Process 2: start processing action 
+72.453857 - Process 2 : block processing action 
+72.453934 - OS: selecting next process 
+72.454018 - OS: removing process 5
+72.454056 - OS: selecting next process 
+72.454117 - Process 2: start processing action 
+73.354111 - Process 2: end processing action 
+73.354187 - OS: selecting next process 
+73.354225 - OS: removing process 2
+73.354248 - Simulator program ending 
