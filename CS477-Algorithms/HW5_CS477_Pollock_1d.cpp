@@ -1,10 +1,10 @@
 /*
-Name: HW5_CS477_Pollock_1b.cpp
+Name: HW5_CS477_Pollock_1.cpp
 Author: Catherine Pollock
-Problem: HW5 P1b
+Problem: HW5 P1
 Date: 11/2/15
 To run:
-$ g++ -Wall -std=c++0x HW5_CS477_Pollock_1b.cpp
+$ g++ -Wall -std=c++0x HW5_CS477_Pollock_1.cpp
 $ ./a.out
 The datafiles must be in the same directory.
 */
@@ -29,18 +29,22 @@ struct solutions
 {
    int maxDrones = 0;
    vector<int> firetimes;
+   unsigned int prevOpt = 0;
 };
 
 // function prototypes
 bool readFile( const char *datafile, vector<int> &vals );
 void solveSubproblems( unordered_map<int, solutions>  &mVals, vector<vector<int>> &m, vector<int> &fVals, vector<int> xVals );
 void printTable( vector<vector<int>> &m, unsigned int size );
+void printReconstruct( vector<vector<int>> &m, unsigned int size );
+
 
 // main function
 int main()
 {
    // declare variables
    bool fileIsGood;
+   unsigned int i;
    vector<int> fVals; // to hold f(j) values
    vector<int> xVals; // to hold x_i values
    unordered_map<int, solutions>  mVals; // to hold optimum values
@@ -73,14 +77,31 @@ int main()
    vector<vector<int>> m( fVals.size(), vector<int>(fVals.size(), 0));
    solveSubproblems( mVals, m, fVals, xVals );
 
+   // PART B
    // print optimum solution
    cout << endl << "The maximum number of drones nuetralized after " << mVals.size()-1 << " seconds is ";
    cout << mVals[mVals.size()-1].maxDrones << '.'<< endl << endl;
 
+   // PART B
    // print out table of values
-   cout << "Table displaying optimum value for second i with j seconds since last charge:" << endl;
+   cout << "Table displaying optimum value for second i with j seconds of charge:" << endl;
    printTable(m, fVals.size());
-   // output results
+   cout << endl << endl;
+
+   // PART C
+   // print out table of values
+   cout << "Table displaying where each subproblem solution came from:" << endl << "(i.e. optimality requires firing at second i, as well as during value in brackets of (i,j), recursively)" << endl;
+   printReconstruct(m, fVals.size());
+   cout << endl;
+
+   // PART D
+   // print out laser times
+   cout << "In order to nuetralize " << mVals[mVals.size()-1].maxDrones << " drones within " << mVals.size()-1 << " seconds, the laser must be fired at second(s):" << endl;
+   for( i = 0; i < mVals[mVals.size()-1].firetimes.size(); i++ )
+   {
+      cout << mVals[mVals.size()-1].firetimes[i] << ' ';
+   }
+   cout << endl << endl;
 
    return 0; // return sucess
 }
@@ -133,23 +154,25 @@ void solveSubproblems( unordered_map<int, solutions>  &mVals, vector<vector<int>
 
       // find max value for second i
       maxPtr = max_element(m[i].begin(), m[i].end() );
-      //cout << *maxPtr << endl;
       j = distance(m[i].begin(), maxPtr );
+      
       // save optimum value
       mVals[i];
       mVals[i].maxDrones = *maxPtr;
-      mVals[i].firetimes = mVals[i-j].firetimes;
-      mVals[i].firetimes.push_back(i);
+      mVals[i].prevOpt = i - j; // Part C
+      mVals[i].firetimes = mVals[i-j].firetimes; // Part D
+      mVals[i].firetimes.push_back(i); // Part D
    }
 
 }
 
+// PART B
 void printTable( vector<vector<int>> &m, unsigned int size )
 {
    unsigned int i, j;
 
    // print axis labels
-   cout << "            j values: " << endl << "             ";
+   cout << "            j values: " << endl << "            ";
    for( unsigned int i = 1 ; i < size; i++ )
    {
       cout << i << ' '; 
@@ -176,6 +199,44 @@ void printTable( vector<vector<int>> &m, unsigned int size )
       for( j = 1; j <= i ; j++ )
       {
          cout << m[i][j] << ' ';
+      }
+      cout << endl;
+   }
+}
+
+// PART C
+void printReconstruct( vector<vector<int>> &m, unsigned int size )
+{
+   unsigned int i, j;
+
+   // print axis labels
+   cout << "            j values: " << endl << "            ";
+   for( unsigned int i = 1 ; i < size; i++ )
+   {
+      cout << i << "    "; 
+   }
+   cout << endl << "            ";
+   for( unsigned int i = 1 ; i < size; i++ )
+   {
+      cout << "_____"; 
+   }
+   cout << endl;
+
+   // print subproblem solutions
+   for( i = size - 1 ; i > 0; i-- )
+   {
+      if( i == size/2 )
+      {
+         cout << "i values: ";
+      }
+      else
+      {
+         cout << "          ";
+      }
+      cout << i << " |";
+      for( j = 1; j <= i ; j++ )
+      {
+         cout << m[i][j]<< "[" << i-j << "]" << ' ';
       }
       cout << endl;
    }
