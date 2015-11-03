@@ -3,6 +3,10 @@ Name: HW5_CS477_Pollock_1b.cpp
 Author: Catherine Pollock
 Problem: HW5 P1b
 Date: 11/2/15
+To run:
+$ g++ -Wall -std=c++0x HW5_CS477_Pollock_1b.cpp
+$ ./a.out
+The datafiles must be in the same directory.
 */
 
 // libraries
@@ -103,7 +107,7 @@ bool readFile( const char *datafile, vector<int> &vals )
       ifs >> tempVal;
       vals.push_back(tempVal);
    }
-   
+
    // return success
    return true;
 }
