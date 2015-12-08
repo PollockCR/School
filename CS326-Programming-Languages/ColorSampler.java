@@ -1,3 +1,8 @@
+// Author: Catherine Pollock
+// Date: 12/7/15
+// Course: CS326
+// Assignment: HW 8
+
 // Imports
 import java.awt.*;
 import javax.swing.*;
