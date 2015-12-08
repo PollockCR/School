@@ -1,9 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
+
 import java.awt.event.*;
 import java.io.*; 
 import java.util.Scanner;
-
 import javax.swing.event.*;
 
 public class ColorSampler extends JFrame
@@ -20,13 +20,18 @@ public class ColorSampler extends JFrame
 	protected JTextField tfRed;
 	protected JTextField tfGreen;
 	protected JTextField tfBlue;
-	protected String colorVals [];
-	protected int redVals [];
-	protected int greenVals  [];
-	protected int blueVals [];
+	protected Color colorVals [];
+	protected String colorNames [];
+	protected Color currentColor;
 	protected int numColors;
 	protected FileIO fileData;
 
+	class Color
+	{
+	   String name;
+	   int red, green, blue;
+	}
+	
    public static void main(String[] argv) throws IOException
    {
       new ColorSampler("Color Sampler");     
@@ -52,7 +57,7 @@ public class ColorSampler extends JFrame
 		tfGreen = new JTextField("");
 		tfBlue = new JTextField("");
 		
-		listColors = new JList();
+		listColors = new JList<String>();
 		listColors.addListSelectionListener(new ListHandler());  
 		
 		getContentPane().setLayout(new GridLayout(3, 4));
@@ -84,17 +89,16 @@ public class ColorSampler extends JFrame
 		tfGreen.setText("255");
 		tfBlue.setText("0");
 		
-		colorVals = new String[100];
-		redVals = new int[100];
-		greenVals = new int[100];
-		blueVals = new int[100];
+		colorVals = new Color[20];
+		colorNames = new String[20];
 		
-		numColors = fileData.readData( colorVals, redVals, greenVals, blueVals );
+		numColors = fileData.readData( colorVals, colorNames );
 		
 		//String colors[] = {"Red", "Green", "Blue", "Yellow", "Cyan", "Magenta", "Orange", "Pink", "Grey", "Black", "White"};
-		listColors.setListData(colorVals);
+		listColors.setListData(colorNames);
 
 	}
+
 
 	// Define action listener                                       
 	private class ActionHandler implements ActionListener 
@@ -140,51 +144,44 @@ public class ColorSampler extends JFrame
 		}
 	}
 
-} 
-
-class FileIO
-{ 
-	protected static Scanner reader;
-	protected static FileOutputStream ostream;
-	protected static PrintWriter writer;
-	protected static int currentColor;
-	
-	public static void main(String argv[]) throws IOException 
+	private class FileIO
 	{ 
-	} 
-	
-	public int readData(String[] colorVals, int[] redVals, int[] greenVals, int[] blueVals) throws IOException
-	{
-		Scanner reader = new Scanner(new FileInputStream("input.txt"));
-		currentColor = 0;
-
-		while (reader.hasNext()) 
-		{  
-			colorVals[currentColor] = reader.next(); 
-			redVals[currentColor] = reader.nextInt(); 
-			greenVals[currentColor] = reader.nextInt();
-			blueVals[currentColor] = reader.nextInt();
-			currentColor += 1;
-		} 
-		reader.;
-		System.out.println("File read."); 
-		return currentColor;
-	}
-	
-	public void writeData(String[] colorVals, int[] redVals, int[] greenVals, int[] blueVals) throws IOException
-	{
-		int index = 0;
-		ostream = new FileOutputStream("output.txt");
-		writer = new PrintWriter(ostream); 
+		protected int currentColor;
 		
-		while (index < currentColor) 
-		{  
-			writer.println(colorVals[index] + " " + redVals[index] + " " + greenVals[index] + " " + blueVals[index] );  
-		} 
-		writer.flush();
-		ostream.close(); 
-		System.out.println("File written."); 
-	}
-
-	
-} 
+		public int readData(Color[] colorVals, String[] colorNames)
+		{
+			try( Scanner reader = new Scanner(new FileInputStream("input.txt")) )
+			{
+				currentColor = 0;
+		
+				while (reader.hasNext()) 
+				{  
+					colorVals[currentColor].name = reader.next(); 
+					colorNames[currentColor] = colorVals[currentColor].name;
+					colorVals[currentColor].red = reader.nextInt(); 
+					colorVals[currentColor].green = reader.nextInt(); 
+					colorVals[currentColor].blue = reader.nextInt(); 
+					currentColor += 1;
+				} 
+				System.out.println("File read."); 
+				reader.close();
+			} catch(FileNotFoundExcpetion ex) {}
+			return currentColor;
+		}
+		
+		public void writeData(Color[] colorVals) throws IOException
+		{
+			int index = 0;
+			FileOutputStream ostream = new FileOutputStream("output.txt");
+			PrintWriter writer = new PrintWriter(ostream); 
+			
+			while (index < currentColor) 
+			{  
+				writer.println(colorVals[index].name + " " + colorVals[index].red + " " + colorVals[index].green + " " + colorVals[index].blue );  
+			} 
+			writer.flush();
+			ostream.close(); 
+			System.out.println("File written."); 
+		}
+	} 
+}
